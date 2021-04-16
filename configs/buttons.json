@@ -1,0 +1,112 @@
+{
+	"btn": [
+		[
+			{ "text": "Ethiopian_Business_Daily", "callback": "Ethiopian_Business_Daily" },
+			{ "text": "remove", "callback": "remove" }
+		],
+		[{ "text": "delete", "callback": "delete" }]
+	],
+	"btn4noImg": [
+		[
+			{
+				"text": "Send_Without_Image",
+				"callback": "Send_Without_Image"
+			},
+			{
+				"text": "Remove",
+				"callback": "remove"
+			}
+		],
+		[
+			{
+				"text": "DNEth",
+				"callback": "DNEth"
+			},
+			{
+				"text": "EPEth",
+				"callback": "EPEth"
+			},
+			{
+				"text": "DNInt",
+				"callback": "DNInt"
+			},
+			{
+				"text": "EPInt",
+				"callback": "EPInt"
+			}
+		],
+		[
+			{
+				"text": "NREth",
+				"callback": "NREth"
+			},
+			{
+				"text": "NUEth",
+				"callback": "NUEth"
+			},
+			{
+				"text": "NRInt",
+				"callback": "NRInt"
+			},
+			{
+				"text": "NUInt",
+				"callback": "NUInt"
+			}
+		],
+		[
+			{
+				"text": "BNEth",
+				"callback": "BNEth"
+			},
+			{
+				"text": "BNInt",
+				"callback": "BNInt"
+			},
+			{
+				"text": "Evnt",
+				"callback": "Evnt"
+			},
+			{
+				"text": "Condo",
+				"callback": "Condo"
+			}
+		],
+		[
+			{
+				"text": "Oil",
+				"callback": "Oil"
+			},
+			{
+				"text": "Tech",
+				"callback": "Tech"
+			},
+			{
+				"text": "Transp",
+				"callback": "Transp"
+			},
+			{
+				"text": "Trsm",
+				"callback": "Trsm"
+			}
+		],
+		[
+			{
+				"text": "Contr",
+				"callback": "Contr"
+			},
+			{
+				"text": "Covid",
+				"callback": "Covid"
+			},
+			{
+				"text": "Fin",
+				"callback": "Fin"
+			},
+			{
+				"text": "Tip",
+				"callback": "Tip"
+			}
+		],
+		[{ "text": "delete", "callback": "delete" }]
+	]
+}

@@ -1,0 +1,23 @@
+{
+	"name": "telegrambot",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon start"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/MrEngineerET/news_scraper_tgBot.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/MrEngineerET/news_scraper_tgBot/issues"
+	},
+	"homepage": "https://github.com/MrEngineerET/news_scraper_tgBot#readme",
+	"dependencies": {
+		"dotenv": "^8.2.0",
+		"telegraf": "^4.3.0"
+	}
+}
