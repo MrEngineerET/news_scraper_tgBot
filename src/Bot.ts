@@ -16,6 +16,7 @@ interface Post {
 	caption?: string
 	source?: string
 	url: string
+	_id: string
 }
 class Bot {
 	bot: Telegraf
@@ -110,8 +111,8 @@ class Bot {
 			try {
 				await ctx.answerCbQuery()
 				await ctx.deleteMessage()
-				const url = this._geturl(ctx) // get the news url from the caption of the message
-				const news = (await axios.get(`${process.env.URL}/news?url=${url}`)).data.data[0]
+				const id = this._getId(ctx) // get the news url from the caption of the message
+				const news = (await axios.get(`${process.env.URL}/news/${id}`)).data.data
 				news.source = news.Source.name
 				this.sendToChannel(news)
 			} catch (error) {
@@ -133,24 +134,44 @@ class Bot {
 			try {
 				await ctx.answerCbQuery()
 				await ctx.deleteMessage()
-				const url = this._geturl(ctx) // get the news url from the caption of the message
-				let id = (await axios.get(`${process.env.URL}/news?url=${url}`)).data.data[0]._id // get the id of the news
+				const id = this._getId(ctx) // get the news url from the caption of the message
 				await axios.delete(`${process.env.URL}/news/${id}`)
 			} catch (error) {
 				debugBot('Failed processing delete callback', error)
 			}
 		})
-
-		this.bot.action(/.+/g, async ctx => {
+		let arr = [
+			'DNEth',
+			'EPEth',
+			'DNInt',
+			'EPInt',
+			'NREth',
+			'NUEth',
+			'NRInt',
+			'NUInt',
+			'BNEth',
+			'BNInt',
+			'Evnt',
+			'Condo',
+			'Oil',
+			'Tech',
+			'Tranp',
+			'Trsm',
+			'Contr',
+			'Covid',
+			'Fin',
+			'Tip',
+		]
+		this.bot.action(arr, async ctx => {
 			//@ts-ignore
 			const callback = ctx.update.callback_query.data
 			// get image name depending of the callback value
 			const image = path.join(__dirname, 'img', `${callback}.jpg`)
-			debugBot(`${callback}callback called`)
+			debugBot(`${callback} callback called`)
 			try {
 				await ctx.answerCbQuery()
 				await ctx.deleteMessage()
-				const url = this._geturl(ctx) // get the news url from the caption of the message
+				const url = this._getId(ctx) // get the news url from the caption of the message
 				const news = (await axios.get(`${process.env.URL}/news?url=${url}`)).data.data[0]
 				news.source = news.Source.name
 				this.sendToChannel(news, image)
@@ -158,6 +179,7 @@ class Bot {
 				debugBot('Failed processing Ethiopian_Business_Daily callback', error)
 			}
 		})
+
 		debugBot('finished registering callback')
 	}
 
@@ -197,6 +219,7 @@ class Bot {
 		${source}
 		${url}
 
+		__id:${post._id}@#$%
 		${footer}`
 
 		return result
@@ -252,12 +275,11 @@ class Bot {
 		}
 	}
 
-	_geturl(ctx) {
+	_getId(ctx) {
 		const message = ctx.update.callback_query.message
-		//@ts-ignore
-		const caption_entities = message.caption_entities
-		let url = caption_entities.filter(el => el.url)[0].url
-		return url
+		const caption = message.caption
+		let id = caption.slice(caption.indexOf('__id') + 5, caption.indexOf('@#$%'))
+		return id
 	}
 	async configureWebhook() {
 		await this.bot.telegram.deleteWebhook()
